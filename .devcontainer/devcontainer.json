@@ -1,0 +1,29 @@
+{
+  "name": "Spring Boot DevContainer (Gradle - wrapper)",
+  "image": "mcr.microsoft.com/devcontainers/java:17",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    }
+  },
+  "postCreateCommand": "./.devcontainer/postCreate.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "pivotal.vscode-spring-boot",
+        "gabrielbb.vscode-lombok",
+        "github.copilot",
+        "github.copilot-chat"
+      ],
+      "settings": {
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "java.compile.nullAnalysis.mode": "automatic",
+        "editor.formatOnSave": true
+      }
+    }
+  },
+  "forwardPorts": [8080],
+  "remoteUser": "vscode"
+}

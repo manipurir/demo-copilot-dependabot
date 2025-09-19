@@ -1,5 +1,11 @@
 package com.example.employee.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.example.employee.dto.CreateEmployeeRequest;
 import com.example.employee.dto.EmployeeResponse;
 import com.example.employee.dto.UpdateEmployeeRequest;
@@ -7,13 +13,9 @@ import com.example.employee.exception.EmployeeAlreadyExistsException;
 import com.example.employee.exception.EmployeeNotFoundException;
 import com.example.employee.model.Employee;
 import com.example.employee.repository.EmployeeRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,8 +26,10 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
     public EmployeeResponse createEmployee(CreateEmployeeRequest request) {
+
+        // @manipurir Create issue #1 for accepting the lenght for firstName and lastName of max 50 characters
         log.info("Creating new employee with email: {}", request.getEmail());
-        
+        // @manipurir check the PR #123 for unique email constraint
         if (employeeRepository.existsByEmail(request.getEmail())) {
             throw new EmployeeAlreadyExistsException("Employee with email " + request.getEmail() + " already exists");
         }
